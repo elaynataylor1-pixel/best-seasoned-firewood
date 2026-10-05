@@ -37,6 +37,14 @@ p.sub{text-align:center;color:#4a5d23;margin-bottom:35px;font-size:1.15rem;font-
 .limited{color:#d64f00}
 .card p{padding:0 15px 18px;font-size:.95rem;color:#444}
 
+/* FEATURED OAK CARD */
+.oak-feature{grid-column:1/-1;display:flex;flex-wrap:wrap;text-align:left;border-width:4px}
+.oak-feature .pic{flex:1 1 320px;height:auto;min-height:260px}
+.oak-feature .body{flex:1 1 300px;padding:28px;display:flex;flex-direction:column;justify-content:center}
+.oak-feature h3{font-size:2rem;margin:0 0 6px}
+.oak-feature .stock{font-size:1.05rem}
+.oak-feature p{padding:8px 0 0;font-size:1.05rem}
+
 .note{background:#e6f9ee;border-left:6px solid #00a651;padding:16px 20px;border-radius:8px;margin-top:32px;font-size:1.05rem;font-weight:800}
 .note.orange{background:#fff0e2;border-color:#ff5e00}
 
@@ -73,6 +81,11 @@ button:hover{background:#d64f00}
 .review p{font-style:italic;margin:10px 0;color:#444;font-weight:700}
 .review .who{font-weight:900;color:#007a3d}
 
+/* VISITOR COUNTER */
+.counter{background:#fff;border:3px solid #00a651;border-radius:14px;display:inline-block;padding:18px 40px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+.counter .num{font-size:2.6rem;font-weight:900;color:#ff5e00}
+.counter .lbl{font-weight:900;color:#007a3d;font-size:1rem;letter-spacing:1px}
+
 .cta{background:linear-gradient(135deg,#ff5e00,#ffa600);color:#fff;text-align:center;padding:60px 20px}
 .cta h2{font-size:2.1rem;font-weight:900;color:#fff}
 .phone{display:inline-block;background:#00a651;color:#fff;text-decoration:none;font-size:1.4rem;padding:14px 34px;border-radius:40px;margin:10px;font-weight:900;box-shadow:0 3px 10px rgba(0,0,0,.3)}
@@ -108,7 +121,7 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <h2 class="sec">Our Firewood</h2>
 <p class="sub">Seasoned oak is our specialty &mdash; <strong>always in stock</strong></p>
 <div class="cards">
-<div class="card"><div class="pic"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firewood_stack.jpg?width=800" alt="Split stacked seasoned oak firewood"></div><h3>Seasoned Oak</h3><div class="stock instock">&#10004; Always In Stock</div><p><strong>Post Oak &bull; Pin Oak &bull; White Oak</strong><br>Clean, dry, naturally seasoned split oak. Hotter, longer burn with more heat output &mdash; great for fireplaces, fire pits, camping &amp; BBQ.</p></div>
+<div class="card oak-feature"><div class="pic"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Firewood_stack.jpg?width=1200" alt="Split stacked seasoned oak firewood"></div><div class="body"><h3>&#128205; Seasoned Oak</h3><div class="stock instock">&#10004; ALWAYS IN STOCK</div><p><strong>Post Oak &bull; Pin Oak &bull; White Oak</strong> &mdash; all premium oak, sold as one seasoned oak stack. Clean, dry, and naturally seasoned. Hotter, longer burn with more heat output &mdash; great for fireplaces, fire pits, camping, wood-fire cooking &amp; BBQ. Delivered and neatly stacked right where you want it at no extra charge.</p></div></div>
 <div class="card special"><div class="pic"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800" alt="Pecan wood BBQ cooking"></div><h3>Pecan</h3><div class="stock limited">&#9200; While Supplies Last</div><p>Sweet-smoking specialty wood, perfect for wood-fire cooking and smoking.</p></div>
 <div class="card special"><div class="pic"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800" alt="Mesquite wood grilling"></div><h3>Mesquite</h3><div class="stock limited">&#9200; While Supplies Last</div><p>Texas classic &mdash; bold flavor and high heat for grilling and BBQ.</p></div>
 <div class="card special"><div class="pic"><img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800" alt="Hickory wood fire for smoking"></div><h3>Hickory</h3><div class="stock limited">&#9200; While Supplies Last</div><p>Rich, hearty smoke &mdash; a BBQ pit favorite for wood-fire cooking.</p></div>
@@ -192,6 +205,12 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 <p class="sub" style="margin-top:25px">Had a great experience? Call or text us your review and we'll add it here!</p>
 </section>
 
+<!-- VISITOR COUNTER -->
+<section style="text-align:center">
+<h2 class="sec">Live Site Visitors</h2>
+<div class="counter"><div class="num" id="hits">...</div><div class="lbl">TOTAL VISITS</div></div>
+</section>
+
 <!-- CONTACT -->
 <div class="cta">
 <h2>Place Your Order Today</h2>
@@ -201,5 +220,12 @@ footer{text-align:center;padding:25px;background:#0b6623;color:#d5f5dd;font-size
 </div>
 
 <footer>&copy; Best Seasoned Firewood &bull; Terrell, TX 75160 &bull; Free local delivery &amp; stacking within 65 miles &bull; Farther deliveries welcome (4'&times;8' minimum)</footer>
+
+<script>
+fetch('https://api.counterapi.dev/v1/best-seasoned-firewood/site-visits/up')
+  .then(r=>r.json())
+  .then(d=>{document.getElementById('hits').textContent=(d.count||0).toLocaleString();})
+  .catch(()=>{document.getElementById('hits').textContent='—';});
+</script>
 </body>
 </html>
